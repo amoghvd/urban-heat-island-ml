@@ -1,0 +1,136 @@
+# LANDSAT 8 COLLECTION 2 LEVEL-2 DOWNLOAD GUIDE
+# For Urban Heat Island Project - CRITICAL INSTRUCTIONS
+
+## �� 🚨 THE PROBLEM YOU'RE SEEING
+When you look at EarthExplorer after clicking a scene, you see:
+```
+Related Files - Level-2 Surface Reflectance Bands
+Select files from this File Group.
+...
+QA_PIXEL.TIF
+QA_RADSAT.TIF
+SR_B1.TIF
+SR_B2.TIF
+SR_B3.TIF
+SR_B4.TIF
+SR_B5.TIF
+SR_B6.TIF
+SR_B7.TIF
+SR_QA_AEROSOL.TIF
+```
+**YOU ARE LOOKING AT THE WRONG PRODUCT GROUP**
+This is the "Level-2 Surface Reflectance ONLY" product (LANDSAT/LC08/C02/T1_L2_SR) - it DOES NOT contain ST_B10!
+
+## � ✅ THE CORRECT PRODUCT TO SELECT
+You need to select instead: **"LANDSAT/LC08/C02/T1_L2"** (Notice: NO "_SR" at the end)
+This is the **FULL Level-2 product** that contains BOTH Surface Reflectance AND Surface Temperature.
+
+## �� 📋 EXACT STEP-BY-STEP INSTRUCTIONS
+
+### 1. AFTER CLICKING A GREEN SQUARE ON THE MAP
+You should see a left-hand panel with sections like:
+- "Browse"
+- "Metadata"
+- **"Products"** ← THIS IS WHERE YOU NEED TO LOOK
+
+### 2. IN THE "PRODUCTS" SECTION
+You will see MULTIPLE product groups available. **LOOK FOR THESE EXACT GROUPS:**
+```
+�▶��️ LANDSAT/LC08/C02/T1_L2          ← THIS IS THE ONE YOU WANT (MAIN LEVEL-2 PRODUCT)
+�▶��️ LANDSAT/LC08/C02/T1_L2_SR       ← THIS IS THE WRONG ONE (SURFACE REFLECTANCE ONLY)
+�▶��️ LANDSAT/LC08/C01/T1_LTP        ← LEVEL-1 PRODUCT (DO NOT USE)
+...and possibly others
+```
+
+### 3. EXPAND THE CORRECT GROUP
+**CLICK THE ARROW � ▶��️ ONLY NEXT TO:**
+```
+LANDSAT/LC08/C02/T1_L2
+```
+( NOT the one with "_SR", NOT the Level-1 ones )
+
+### 4. YOU WILL NOW SEE A LIST THAT INCLUDES ST_B10
+When you expand **LANDSAT/LC08/C02/T1_L2**, you should see options like:
+```
+ST_B10
+ST_ATRAD
+ST_UDIM
+ST_EMIS
+ST_EMSD
+QA_PIXEL
+QA_RADSAT
+SR_B1
+SR_B2
+SR_B3
+SR_B4
+SR_B5
+SR_B6
+SR_B7
+SR_CLoud_*
+ANGLE_*
+MTL.txt
+...etc
+```
+**NOW YOU CAN SEE ST_B10!**
+
+### 5. SELECT EXACTLY THESE 6 BOXES (UNCHECK EVERYTHING ELSE)
+```
+�☑��️ ST_B10    ← Surface Temperature (Band 10) - WE NEED THIS
+�☑��️ QA_PIXEL  ← Cloud/Shadow/Snow/Ice Mask - CRITICAL FOR VALID PIXELS
+�☑��️ SR_B4     ← Red Band
+�☑��️ SR_B5     ← NIR Band
+�☑��️ SR_B6     ← SWIR1 Band
+�☑��️ SR_B7     ← SWIR2 Band
+```
+
+### 6. VERIFY BEFORE DOWNLOADING
+At the bottom of the left panel, click "Download Options" → "Download"
+You should get a file named like: `LC08_L2SP_[PATH][ROW]_20220615_20220628_02_T1.tar.gz`
+**NOTE:** The product identifier in the filename should be `L2SP` (Level-2 Surface Product), NOT `L1TP` or `L2SR`.
+
+### 7. AFTER EXTRACTION, VERIFY YOU HAVE:
+In the extracted folder, you MUST see these files:
+```
+ST_B10.TIF
+QA_PIXEL.TIF
+SR_B4.TIF
+SR_B5.TIF
+SR_B6.TIF
+SR_B7.TIF
+_MTL.txt (ignore this)
+```
+
+## �� ❓ WHY YOU WERE CONFUSED
+EarthExplorer lists Level-2 products separately:
+- `LANDSAT/LC08/C02/T1_L2` = FULL product (SR + ST + QA + Angle) ← **WE NEED THIS**
+- `LANDSAT/LC08/C02/T1_L2_SR` = SR-only product (SR + QA + Angle only) ← **NO ST BANDS**
+- `LANDSAT/LC08/C02/T1_L2_ST` = ST-only product (ST + QA + Angle only) ← Rarely used
+
+You were looking at the SR-only product group by mistake. The FULL product group (without _SR) is what contains ST_B10.
+
+## �� 🚨 CRITICAL REMINDER
+When expanding the product groups, **DO NOT** expand:
+- Anything with `_SR` at the end (Surface Reflectance only)
+- Anything with `_ST` at the end (Surface Temperature only - if it exists)
+- Anything with `C01` (Collection 1 - older processing)
+- Anything with `L1TP` (Level-1 - raw data requiring atmospheric correction)
+
+**ONLY** expand: `LANDSAT/LC08/C02/T1_L2` → then check the 6 boxes listed above.
+
+## �� 💡 IF YOU STILL DON'T SEE ST_B10
+1. Try a different scene date (e.g., 06/10/2022, 06/20/2022, 07/01/2022)
+2. Make sure you selected "Landsat 8 OLI/TIRS C2 L2" in the Data Set selection
+3. Verify the scene's Display ID contains `L2SP` (not `L1TP` or `L2SR`)
+4. Some very new scenes might have temporary processing delays, but June 2022 should be fine
+
+## � ✅ VERIFICATION COMMAND (RUN AFTER EXTRACTION)
+In PowerShell/CMD:
+```
+dir data\Landsat\LC08_L2SP_*\ST_B10.TIF
+dir data\Landsat\LC08_L2SP_*\QA_PIXEL.TIF
+dir data\Landsat\LC08_L2SP_*\SR_B4.TIF
+dir data\Landsat\LC08_L2SP_*\SR_B5.TIF
+dir data\Landsat\LC08_L2SP_*\SR_B6.TIF
+dir data\Landsat\LC08_L2SP_*\SR_B7.TIF
+```
+If all 6 files appear, you have the correct data!

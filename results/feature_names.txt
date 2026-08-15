@@ -1,0 +1,6 @@
+LST
+NDVI
+NDBI
+Brightness
+PopDensity
+Bio1

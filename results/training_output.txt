@@ -1,0 +1,113 @@
+======================================================================
+URBAN HEAT ISLAND - ML TRAINING WITH ENSEMBLE & CROSS-VALIDATION
+======================================================================
+
+[STEP 1] Loading GeoTIFF features...
+  Loaded: (6, 7781, 7661) (bands x height x width)
+
+[STEP 2] Preparing data...
+  Total valid pixels: 40,639,315
+  Target distribution: [36585052  4054263]
+  Using 30,000 samples
+  Train: 24,000 | Test: 6,000
+
+[STEP 3] Scaling features...
+
+[STEP 4] Setting up cross-validation...
+
+[STEP 5] Training ensemble models...
+  - Random Forest (5-fold CV)...
+    CV Scores: ['1.000', '1.000', '1.000', '1.000', '1.000'] | Mean: 1.000
+  - Logistic Regression (5-fold CV)...
+    CV Scores: ['1.000', '1.000', '1.000', '1.000', '1.000'] | Mean: 1.000
+  - XGBoost (5-fold CV)...
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:26] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:27] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:27] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:27] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:27] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+    CV Scores: ['1.000', '1.000', '1.000', '1.000', '1.000'] | Mean: 1.000
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:28] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+
+  - Voting Classifier (Hard Voting)...
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:29] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:29] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:30] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:31] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:32] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+    CV Scores: ['1.000', '1.000', '1.000', '1.000', '1.000'] | Mean: 1.000
+C:\Users\deepi\AppData\Local\Programs\Python\Python314\Lib\site-packages\xgboost\training.py:200: UserWarning: [23:39:33] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:794: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+
+======================================================================
+MODEL PERFORMANCE SUMMARY
+======================================================================
+Model                     Test AUC     Test F1      CV Mean AUC 
+----------------------------------------------------------------------
+Random Forest             1.0000       1.0000       1.0000      
+Logistic Regression       1.0000       0.9931       1.0000      
+XGBoost                   1.0000       0.9845       1.0000      
+Voting Ensemble           1.0000       0.9983       1.0000      
+
+======================================================================
+BEST MODEL: Random Forest (AUC: 1.0000)
+======================================================================
+
+Feature Importance (Random Forest):
+  LST            : 0.8057
+  NDBI           : 0.1012
+  NDVI           : 0.0537
+  Brightness     : 0.0220
+  Bio1           : 0.0119
+  PopDensity     : 0.0056
+
+[STEP 6] Saving results...
+Results saved to: results/model_performance.txt
+
+======================================================================
+PROJECT COMPLETE!
+======================================================================
+
+Key Achievements:
+  - Feature engineering from 4 data sources
+  - Trained 4 ensemble models
+  - Cross-validated with 5-fold stratified CV
+  - Voting classifier combining 3 base models
+  - Best model AUC: 1.0000
+
+======================================================================
