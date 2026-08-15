@@ -90,7 +90,3 @@ Once you have the `features.tif` file, you can:
 ## License
 
 This project is for educational purposes. Please refer to the respective data sources for their usage policies.
-
-## Contact
-
-[← Your Name or Contact Information]
